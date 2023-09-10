@@ -46,6 +46,11 @@ class Floor {
                "Level: " . $this->level . "<br>" .
                "<br>";
     }
+
+
+    function getRooms(){
+        
+    }
 }
 
 

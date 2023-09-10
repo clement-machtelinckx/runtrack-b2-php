@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Room {
 
     private $id;
@@ -64,6 +66,45 @@ class Room {
                "<br>";
     }
 
+
+    function getGrades($id){
+
+        $servername = "localhost";
+        $username = "root";
+        $password = "Clement2203$";
+        $dbname = "Ip_official";
+        
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connexion réussie (room)<br>";
+    } catch(PDOException $e) {
+        echo "Erreur de connexion : " . $e->getMessage();
+    }
+    
+        $sql = "SELECT * FROM grade WHERE room_id = :room_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':room_id', $room_id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $gradesData = $stmt->fetchALL(PDO::FETCH_ASSOC);
+    
+
+        $grades = [];
+
+        foreach ($gradesData as $gradeData) {
+            $grade = new Grade(
+                $gradeData['id'],
+                $gradeData['room_id'],
+                $gradeData['name'],
+                $gradeData['year'],
+            );
+            $grades[] = $grade;
+
+    }
+    return $grades;
+
+}
 }
 
 
