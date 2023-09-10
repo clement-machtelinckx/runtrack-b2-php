@@ -3,7 +3,44 @@ include "class/Student.php";
 include "class/Floor.php";
 include "class/Grade.php";
 include "class/Room.php";
+include "function.php";
 
+
+
+$student = findOneStudent(301);
+
+if ($student) {
+    echo $student; // Cela affichera les détails de l'étudiant
+} else {
+    echo "Aucun étudiant trouvé avec cet ID.";
+}
+
+$grade = findOneGrade(6);
+
+if ($grade) {
+    echo $grade; // Cela affichera les détails de l'étudiant
+} else {
+    echo "Aucun étudiant trouvé avec cet grade";
+}
+
+$floor = findOneFloor(2);
+
+if ($floor) {
+    echo $floor; // Cela affichera les détails de l'étudiant
+} else {
+    echo "Aucun étudiant trouvé avec cet grade";
+}
+
+$room = findOneRoom(2);
+
+if ($room) {
+    echo $room; // Cela affichera les détails de l'étudiant
+} else {
+    echo "Aucun étudiant trouvé avec cet grade";
+}
+
+
+/*
 $student = new Student(1, 1, "email@email.com", "Terry Cristinelli","1990-01-18","Male");
 $student2 = new Student();
 
@@ -26,5 +63,6 @@ $floor = new Floor(1, "Rez de chaussée", 0);
 $floor2 = new Floor();
 
 echo $floor;
-echo $floor2;
+echo $floor2;*/
+
 ?>
