@@ -67,7 +67,7 @@ class Room {
     }
 
 
-    function getGrades($id){
+    function getGrades(){
 
         $servername = "localhost";
         $username = "root";
@@ -84,7 +84,7 @@ class Room {
     
         $sql = "SELECT * FROM grade WHERE room_id = :room_id";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':room_id', $room_id, PDO::PARAM_INT);
+        $stmt->bindParam(':room_id', $this->id, PDO::PARAM_INT);
         $stmt->execute();
         
         $gradesData = $stmt->fetchALL(PDO::FETCH_ASSOC);
@@ -103,7 +103,7 @@ class Room {
 
     }
     return $grades;
-
+    
 }
 }
 

@@ -10,13 +10,21 @@ include "function.php";
 /*test job 5*/
 
 
-$grade = findOneGrade(3);
+$grade = findOneGrade(4);
 $students = $grade->getStudents();
 
-$room = findOneRoom(1);
-var_dump($room);
-$grades = $room->getGrades($room->getId());
-var_dump($grades);
+$room = findOneRoom(6);
+
+$grades = $room->getGrades();
+
+
+$floor = findOneFloor(2);
+
+$rooms = $floor->getRooms();
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +54,7 @@ var_dump($grades);
         <?php } ?>
     </table>
     <h1>Grade list</h1>
-    <?php var_dump($grades);?>
+
     <table border="1">
         <tr>
             <th>ID</th>
@@ -64,6 +72,29 @@ var_dump($grades);
             </tr>
         <?php } ?>
     </table>
+
+
+    <h1>Room list </h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>floor_id</th>
+            <th>Name</th>
+            <th>Capacity</th>
+        </tr>
+
+        <?php foreach ($rooms as $roombis) { ?>
+            <tr>
+                <td><?php echo $roombis->getId(); ?></td>
+                <td><?php echo $roombis->getFloorId(); ?></td>
+                <td><?php echo $roombis->getName(); ?></td>
+                <td><?php echo $roombis->getCapacity(); ?></td>
+
+            </tr>
+        <?php } ?>
+    </table>
+
+
 </body>
 </html>
 

@@ -49,9 +49,45 @@ class Floor {
 
 
     function getRooms(){
+
+        $servername = "localhost";
+        $username = "root";
+        $password = "Clement2203$";
+        $dbname = "Ip_official";
         
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connexion réussie (floor)<br>";
+    } catch(PDOException $e) {
+        echo "Erreur de connexion : " . $e->getMessage();
     }
+    
+        $sql = "SELECT * FROM room WHERE floor_id = :floor_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':floor_id', $this->id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $roomsData = $stmt->fetchALL(PDO::FETCH_ASSOC);
+    
+
+        $rooms = [];
+
+        foreach ($roomsData as $roomData) {
+            $room = new Room(
+                $roomData['id'],
+                $roomData['floor_id'],
+                $roomData['name'],
+                $roomData['capacity'],
+            );
+            $rooms[] = $room;
+
+    }
+    return $rooms;
+
 }
+}
+
 
 
 
